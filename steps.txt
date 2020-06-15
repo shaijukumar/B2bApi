@@ -1,0 +1,78 @@
+android native expo developer menu 
+
+cd C:\Program Files (x86)\Android\android-sdk\platform-tools
+adb shell input keyevent 82
+
+==================
+https://expo.io/tools#snack
+
+node v >= 12
+
+
+npm i -g expo-cli
+
+install expo clinet
+
+vscode extensions
+------------------
+React Native Tools
+React-Native/React/Redux snippets for es6/es7
+Material Icon Theme
+
+Create project
+---------nnnnnnnnnnnnnnnnnnn
+
+expo init App
+
+VS Code dubug
+=====
+https://codewithmosh.com/courses/887220/lectures/16299612
+package : React Native Tools
+debug tab > create launch.json file > select "React Native" > select "Attach to Packager" > click OK
+in D:\Shaiju\ReactNative\B2BApp\.vscode\launch.json
+add "Debug Android"
+
+Preference > settings > search "react-native.package.port" > update port to 19001
+
+
+DateTimePicker
+https://docs.expo.io/versions/latest/sdk/date-time-picker/
+expo install @react-native-community/datetimepicker
+
+
+formik
+https://jaredpalmer.com/formik/
+npm install formik --save
+
+validation
+npm i yup
+
+
+npm install react-navigation
+
+
+install axios
+
+
+https://www.youtube.com/watch?v=0-S5a0eXPoc&t=9s
+24
+
+app:
+basic ui
+axios
+access core api 
+
+core: login
+create api
+
+Rdux
+npm install react-redux
+
+=============
+npx create-react-app client-web --use-npm --typescript
+
+
+==========
+expo init client-app
+
+expo install expo-secure-store
