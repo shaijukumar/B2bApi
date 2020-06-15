@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Git\\B2B\\B2bApi\\API\\API.csproj": {}
+    "D:\\Git\\B2B\\B2bApi\\API\\API.csproj": {}
   },
   "projects": {
-    "d:\\Git\\B2B\\B2bApi\\API\\API.csproj": {
+    "D:\\Git\\B2B\\B2bApi\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Git\\B2B\\B2bApi\\API\\API.csproj",
+        "projectUniqueName": "D:\\Git\\B2B\\B2bApi\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "d:\\Git\\B2B\\B2bApi\\API\\API.csproj",
+        "projectPath": "D:\\Git\\B2B\\B2bApi\\API\\API.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "d:\\Git\\B2B\\B2bApi\\API\\obj\\",
+        "outputPath": "D:\\Git\\B2B\\B2bApi\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
