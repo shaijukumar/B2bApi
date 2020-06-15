@@ -1,0 +1,20 @@
+﻿EF
+===============================
+> dotnet tool install --global dotnet-ef 
+> dotnet ef 
+> dotnet ef migrations add ImageIdUpdate -p API/ -s API/ 
+> dotnet ef migrations add PageIsUniqueKeyAdded -p Persistence/ -s API/ 
+> drop database 
+> dotnet ef  database drop -p Persistence/ -s API/ 
+
+===============================
+Git
+
+echo "# B2B" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/shaijukumar/B2B.git
+git push -u origin master
+
+===============================
