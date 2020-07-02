@@ -9,11 +9,12 @@ using System;
 
 namespace API.Controllers
 {
+
     public class UserController : BaseController
     {
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(Login.Query query)
+        public async Task<ActionResult<UserDTO>> Login(Login.Query query)
         {
             return await Mediator.Send(query);
         }
@@ -53,17 +54,17 @@ namespace API.Controllers
         //}
 
         [HttpGet]
+        //[AllowAnonymous]
         [Authorize(Policy = "IsAppAdmin")]
-        //[Authorize(Roles = "IsAppAdmin")]
-        public async Task<ActionResult<List<AppUser>>> GetAllUsers()
+        public async Task<ActionResult<List<AppUser>>> Get()
         {
             return await Mediator.Send(new UserList.Query());
         }
 
 
         //[HttpGet]
-        //[Authorize(Roles = "AppAdmin")]
-        //public string Test()
+        //[Authorize(Policy = "IsAppAdmin")]
+        //public string Get()
         //{
         //    return "Test - " + DateTime.Now.ToString();
         //}

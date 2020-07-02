@@ -245,6 +245,23 @@ namespace API.Migrations
                     b.ToTable("CategorySize");
                 });
 
+            modelBuilder.Entity("API.Model.TestApp", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TestApps");
+                });
+
             modelBuilder.Entity("API.Model.UserPhoto", b =>
                 {
                     b.Property<string>("Id")

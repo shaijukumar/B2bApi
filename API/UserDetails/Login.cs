@@ -15,7 +15,7 @@ namespace API.UserDetails
 {
     public class Login
     {
-        public class Query : IRequest<User>
+        public class Query : IRequest<UserDTO>
         {
             public string Email { get; set; }
             public string Password { get; set; }
@@ -30,7 +30,7 @@ namespace API.UserDetails
             }
         }
 
-        public class Handler : IRequestHandler<Query, User>
+        public class Handler : IRequestHandler<Query, UserDTO>
         {
             private readonly UserManager<AppUser> _userManager;
             private readonly SignInManager<AppUser> _signInManager;
@@ -42,7 +42,7 @@ namespace API.UserDetails
                 _userManager = userManager;
             }
 
-            public async Task<User> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<UserDTO> Handle(Query request, CancellationToken cancellationToken)
             {
                 var user = await _userManager.FindByEmailAsync(request.Email);
 
@@ -69,13 +69,14 @@ namespace API.UserDetails
 
                     //string userPhoto = user.Photos.Url ?? "";
                     // TODO: generate token
-                    return new User
+                    return new UserDTO
                     {
                         DisplayName = user.DisplayName,
                         Token = _jwtGenerator.CreateToken(user, roles),
                         Username = user.UserName,
                         Email = user.Email,
-                        Image = userPhoto
+                        Image = userPhoto,
+                        UserRoles = roles
                     };
                 }
 

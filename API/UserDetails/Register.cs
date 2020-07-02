@@ -76,8 +76,8 @@ namespace API.UserDetails
                 {
                     DisplayName = request.DisplayName,
                     Email = request.Email,
-                    UserName = request.Username
-                    
+                    UserName = request.Username,
+                    PhoneNumber= request.Mobile                    
                 };
 
                 var result = await _userManager.CreateAsync(user, request.Password);

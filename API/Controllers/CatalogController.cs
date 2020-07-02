@@ -14,11 +14,11 @@ namespace API.Controllers
     {
 
         [HttpGet]        
-        public async Task<ActionResult<List<CatlogDto>>> List()
+        public async Task<ActionResult<List<CatlogListDto>>> List()
         {
             return await Mediator.Send(new List.Query());
         }
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<CatlogDto>> Details(Guid id)
         {
@@ -50,6 +50,35 @@ namespace API.Controllers
         {
             return await Mediator.Send(command);
         }
+
+        //// GET api/Catalog/ResellerCatalogList/5
+        //[HttpGet("ResellerCatalogList/{id}")]
+        //public async Task<ActionResult<List<CatlogListDto>>> ResellerCatalogList(string id, ResellerCatalogList.Command command)
+        //{
+        //    //command.SupplierPhone = id;
+        //    //return await Mediator.Send(command);
+
+        //}
+
+        // GET api/Catalog/ResellerCatalogList/5
+        [HttpGet("ResellerCatalogList/{id}")]
+        public async Task<ActionResult<List<CatlogListDto>>> ResellerCatalogList(string id)
+        {
+            return await Mediator.Send(new ResellerCatalogList.Query { SupplierPhone = id });
+
+            //ResellerCatalogList.Command command = 
+            //    new Features.Catlog.ResellerCatalogList.Command();
+            //command.SupplierPhone = id;
+            //return await Mediator.Send(command);
+
+            ////return "test 123";
+
+            //
+            //
+
+        }
+
+
 
     }
 }

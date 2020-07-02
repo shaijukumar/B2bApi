@@ -14,9 +14,9 @@ namespace API.Features.Catlog
 {
     public class List
     {
-        public class Query : IRequest<List<CatlogDto>> { }
+        public class Query : IRequest<List<CatlogListDto>> { }
 
-        public class Handler : IRequestHandler<Query, List<CatlogDto>>
+        public class Handler : IRequestHandler<Query, List<CatlogListDto>>
         {
             private readonly IMapper _mapper;
 
@@ -33,12 +33,18 @@ namespace API.Features.Catlog
                 _userManager = userManager;
             }
 
-            public async Task<List<CatlogDto>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<CatlogListDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var catalogs = await _context.Catalogs
-                    .ToListAsync();
-                return _mapper.Map<List<Catalog>, List<CatlogDto>>(catalogs);
+                var currentUser = await _userManager.FindByNameAsync(_userAccessor.GetCurrentUsername());
 
+                _context.ChangeTracker.LazyLoadingEnabled = false;
+                var catalogs = await _context.Catalogs
+                    .Include(c => c.Photos)   
+                    .Where( x => x.Supplier == currentUser )
+                    .ToListAsync();
+                //return catalogs;
+                return _mapper.Map<List<Catalog>, List<CatlogListDto>>(catalogs);
+               
                 //var CurrentUsername = _userAccessor.GetCurrentUsername();
 
                 //var user = await _userManager.FindByNameAsync(_userAccessor.GetCurrentUsername());

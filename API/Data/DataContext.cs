@@ -21,7 +21,14 @@ namespace API.Data
         public DbSet<AppConfig> AppConfig { get; set; }
         public DbSet<CategorySize> CategorySize { get; set; }
         public DbSet<CategoryColores> CategoryColores { get; set; }
+
+        public DbSet<TestApp> TestApps { get; set; }
+        public DbSet<OrderAttachments> OrderAttachmentss { get; set; }
+		public DbSet<OrderTransactions> OrderTransactionss { get; set; }
+		public DbSet<OrderMaster> OrderMasters { get; set; }
+		//##ModelDbSet##
         
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -40,3 +47,5 @@ namespace API.Data
         }
     }
 }
+
+

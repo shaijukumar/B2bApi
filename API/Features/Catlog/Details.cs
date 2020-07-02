@@ -24,7 +24,7 @@ namespace API.Features.Catlog
         {
             public Guid Id { get; set; }
         }
-
+         
         public class Handler : IRequestHandler<Query, CatlogDto>
         {
             private readonly DataContext _context;

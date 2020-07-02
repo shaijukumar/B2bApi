@@ -93,10 +93,15 @@ namespace API
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
             });
+            
+         //   .AddJsonOptions(options =>
+         //   options.SerializerSettings.ContractResolver
+         //= new DefaultContractResolver()); 
 
             services.AddAutoMapper(typeof(List.Handler));
 
-            services.AddControllers();
+            services.AddControllers()
+                 .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null); ;
 
             var builder = services.AddIdentityCore<AppUser>()
                 .AddRoles<IdentityRole>();

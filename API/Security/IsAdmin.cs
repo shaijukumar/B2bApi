@@ -46,7 +46,7 @@ namespace API.Security
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, IsAdmin requirement)
         {
-            if (_httpContextAccessor.HttpContext.User.IsInRole("AppAdmin"))
+            if (_httpContextAccessor.HttpContext.User.IsInRole("Admin"))
             {
                 context.Succeed(requirement);
             }
