@@ -2,7 +2,7 @@
 ===============================
 > dotnet tool install --global dotnet-ef 
 > dotnet ef 
-> dotnet ef migrations add TestAppUpdate -p API/ -s API/ 
+> dotnet ef migrations add PagesUpdate -p API/ -s API/ 
 > dotnet ef migrations add PageIsUniqueKeyAdded -p Persistence/ -s API/ 
 > drop database 
 > dotnet ef  database drop -p Persistence/ -s API/ 
@@ -22,5 +22,3 @@ git push -u origin master
 https://github.com/shaijukumar/B2bApi/blob/master/API/notes.txt
 
 https://github.com/shaijukumar/B2bApi/
-
-1

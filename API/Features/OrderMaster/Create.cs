@@ -35,7 +35,7 @@ namespace API.Features._OrderMaster
         {
             public CommandValidator()
             {
-RuleFor(x => x.Reseller).NotEmpty();
+                RuleFor(x => x.Reseller).NotEmpty();
 				RuleFor(x => x.Supplier).NotEmpty();
 				RuleFor(x => x.Catalog).NotEmpty();
 				RuleFor(x => x.Qty).NotEmpty();

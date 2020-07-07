@@ -16,6 +16,11 @@ namespace API.Data
         public DbSet<UserPhoto> UserPhoto { get; set; }
         public DbSet<CatalogPhoto> CatalogPhotos { get; set; }
         public DbSet<Value> Values { get; set; }
+
+        //Page Publishing
+        public DbSet<PageItemCategory> PageItemCategorys { get; set; }
+        public DbSet<Page> Pages { get; set; }
+
         public DbSet<Catalog> Catalogs { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<AppConfig> AppConfig { get; set; }
@@ -33,7 +38,16 @@ namespace API.Data
         {
             base.OnModelCreating(builder);
 
-            
+            builder.Entity<PageItemCategory>()
+            .HasOne(x => x.Parent)
+            .WithMany(x => x.Children)
+            .HasForeignKey(x => x.ParentId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Page>()
+                .HasIndex(u => u.URLTitle).IsUnique();
+
+
 
             //builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "User", NormalizedName = "USER", Id = Guid.NewGuid().ToString(), ConcurrencyStamp = Guid.NewGuid().ToString() });
             //builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "ADMIN", Id = Guid.NewGuid().ToString(), ConcurrencyStamp = Guid.NewGuid().ToString() });
