@@ -20,6 +20,7 @@ namespace API.Data
         //Page Publishing
         public DbSet<PageItemCategory> PageItemCategorys { get; set; }
         public DbSet<Page> Pages { get; set; }
+        public DbSet<PagePhotos> PagePhotoss { get; set; }
 
         public DbSet<Catalog> Catalogs { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -31,6 +32,7 @@ namespace API.Data
         public DbSet<OrderAttachments> OrderAttachmentss { get; set; }
 		public DbSet<OrderTransactions> OrderTransactionss { get; set; }
 		public DbSet<OrderMaster> OrderMasters { get; set; }
+		
 		//##ModelDbSet##
         
 
@@ -61,5 +63,6 @@ namespace API.Data
         }
     }
 }
+
 
 

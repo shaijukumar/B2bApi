@@ -12,11 +12,11 @@ using System.Collections;
 using System.Collections.Generic;
 using AutoMapper;
 
-namespace API.Features._OrderAttachments
+namespace API.Features._PagePhotos
 {
     public class Create
     {
-        public class Command : IRequest<OrderAttachmentsDto>
+        public class Command : IRequest<PagePhotosDto>
         {
 
 		public string Url { get; set; }
@@ -31,7 +31,7 @@ RuleFor(x => x.Url).NotEmpty();
             }
         }
 
-        public class Handler : IRequestHandler<Command, OrderAttachmentsDto>
+        public class Handler : IRequestHandler<Command, PagePhotosDto>
         {
             private readonly DataContext _context;
             private readonly IUserAccessor _userAccessor;
@@ -44,19 +44,19 @@ RuleFor(x => x.Url).NotEmpty();
 
             }
 
-            public async Task<OrderAttachmentsDto> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<PagePhotosDto> Handle(Command request, CancellationToken cancellationToken)
             {                                                   
-                var orderAttachments = new OrderAttachments
+                var pagePhotos = new PagePhotos
                 {
 					Url  = request.Url                  
                 };
 
-        _context.OrderAttachmentss.Add(orderAttachments);
+        _context.PagePhotoss.Add(pagePhotos);
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success)
                 {
-                    var toReturn = _mapper.Map <OrderAttachments, OrderAttachmentsDto>(orderAttachments);
+                    var toReturn = _mapper.Map <PagePhotos, PagePhotosDto>(pagePhotos);
                     return toReturn;
                 }                
 

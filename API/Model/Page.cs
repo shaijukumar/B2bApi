@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace API.Model
 {
@@ -10,7 +11,8 @@ namespace API.Model
         //public string CategoryId { get; set; }
         public string URLTitle { get; set; }
         public string PageHtml { get; set; }
-
         public virtual PageItemCategory Category { get; set; }
+        public virtual ICollection<PagePhotos> PagePhotos { get; set; }
+
     }
 }
