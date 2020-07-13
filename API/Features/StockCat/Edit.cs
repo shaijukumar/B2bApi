@@ -13,22 +13,22 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Features._PagePhotos
+namespace API.Features._StockCat
 {
     public class Edit
     {
-        public class Command : IRequest<PagePhotosDto>
+        public class Command : IRequest<StockCatDto>
         {            
             
 		public Guid Id { get; set; }
-		public string Url { get; set; }
+		public string Title { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
             {
-                RuleFor(x => x.Url).NotEmpty();
+                RuleFor(x => x.Title).NotEmpty();
 				
             }
 
@@ -38,7 +38,7 @@ namespace API.Features._PagePhotos
             }
         }
 
-        public class Handler : IRequestHandler<Command, PagePhotosDto>
+        public class Handler : IRequestHandler<Command, StockCatDto>
         {
             private readonly DataContext _context;
             private readonly IUserAccessor _userAccessor;
@@ -50,16 +50,16 @@ namespace API.Features._PagePhotos
                 _userAccessor = userAccessor;
             }
 
-            public async Task<PagePhotosDto> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<StockCatDto> Handle(Command request, CancellationToken cancellationToken)
             {
                 //var test = request.test;
 
-                var pagePhotos = await _context.PagePhotoss
+                var stockCat = await _context.StockCats
                     .FindAsync(request.Id);
-                if (pagePhotos == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { PagePhotos = "Not found" });
+                if (stockCat == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { StockCat = "Not found" });
 
-				pagePhotos.Url  = request.Url ?? pagePhotos.Url;
+				stockCat.Title  = request.Title ?? stockCat.Title;
 				
 				
 				// _context.Entry(cl).State = EntityState.Modified;  //.Entry(user).State = EntityState.Added; /
@@ -67,7 +67,7 @@ namespace API.Features._PagePhotos
 				//if (success) return Unit.Value;
 				if (success)
 				{
-					var toReturn = _mapper.Map<PagePhotos, PagePhotosDto>(pagePhotos);
+					var toReturn = _mapper.Map<StockCat, StockCatDto>(stockCat);
 					return toReturn;
 				}
 

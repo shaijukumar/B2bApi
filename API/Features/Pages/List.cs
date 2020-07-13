@@ -28,7 +28,7 @@ namespace Application.Pages
             {
                 var pages = await _context.Pages
                     .ToListAsync();
-                
+                //return pages;
                 return _mapper.Map<List<Page>, List<PageDto>>(pages);
 
             } 

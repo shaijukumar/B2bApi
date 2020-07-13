@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200608061146_Update1")]
-    partial class Update1
+    [Migration("20200712175050_Update3")]
+    partial class Update3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,6 +209,9 @@ namespace API.Migrations
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("configid")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CatalogId");
@@ -225,6 +228,9 @@ namespace API.Migrations
                     b.Property<Guid?>("CatalogId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CatlogId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Qty")
                         .HasColumnType("int");
 
@@ -239,6 +245,231 @@ namespace API.Migrations
                     b.HasIndex("CatalogId");
 
                     b.ToTable("CategorySize");
+                });
+
+            modelBuilder.Entity("API.Model.OrderAttachments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("OrderTransactionsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderTransactionsId");
+
+                    b.ToTable("OrderAttachmentss");
+                });
+
+            modelBuilder.Entity("API.Model.OrderMaster", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BillingAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CatalogId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ResellerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ShippingAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SupplierId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CatalogId");
+
+                    b.HasIndex("ResellerId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("OrderMasters");
+                });
+
+            modelBuilder.Entity("API.Model.OrderTransactions", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Action")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("OrderMasterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderMasterId");
+
+                    b.ToTable("OrderTransactionss");
+                });
+
+            modelBuilder.Entity("API.Model.Page", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PageHtml")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PageStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("URLTitle")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("URLTitle")
+                        .IsUnique()
+                        .HasFilter("[URLTitle] IS NOT NULL");
+
+                    b.ToTable("Pages");
+                });
+
+            modelBuilder.Entity("API.Model.PageItemCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("PageItemCategorys");
+                });
+
+            modelBuilder.Entity("API.Model.PagePhoto", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid?>("PageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PageId");
+
+                    b.ToTable("PagePhotos");
+                });
+
+            modelBuilder.Entity("API.Model.StockCat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StockCats");
+                });
+
+            modelBuilder.Entity("API.Model.StockManagemnt", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CurrentStock")
+                        .HasColumnType("int");
+
+                    b.Property<string>("QtyType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RequiredStock")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ShopTag")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("StockManagemnts");
+                });
+
+            modelBuilder.Entity("API.Model.TestApp", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TestApps");
                 });
 
             modelBuilder.Entity("API.Model.UserPhoto", b =>
@@ -267,23 +498,6 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Values");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Value 101"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Value 102"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Value 103"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -454,6 +668,65 @@ namespace API.Migrations
                     b.HasOne("API.Model.Catalog", null)
                         .WithMany("Sizes")
                         .HasForeignKey("CatalogId");
+                });
+
+            modelBuilder.Entity("API.Model.OrderAttachments", b =>
+                {
+                    b.HasOne("API.Model.OrderTransactions", null)
+                        .WithMany("Attachments")
+                        .HasForeignKey("OrderTransactionsId");
+                });
+
+            modelBuilder.Entity("API.Model.OrderMaster", b =>
+                {
+                    b.HasOne("API.Model.Catalog", "Catalog")
+                        .WithMany()
+                        .HasForeignKey("CatalogId");
+
+                    b.HasOne("API.Model.AppUser", "Reseller")
+                        .WithMany()
+                        .HasForeignKey("ResellerId");
+
+                    b.HasOne("API.Model.AppUser", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId");
+                });
+
+            modelBuilder.Entity("API.Model.OrderTransactions", b =>
+                {
+                    b.HasOne("API.Model.OrderMaster", null)
+                        .WithMany("Transactions")
+                        .HasForeignKey("OrderMasterId");
+                });
+
+            modelBuilder.Entity("API.Model.Page", b =>
+                {
+                    b.HasOne("API.Model.PageItemCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("API.Model.PageItemCategory", b =>
+                {
+                    b.HasOne("API.Model.PageItemCategory", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Model.PagePhoto", b =>
+                {
+                    b.HasOne("API.Model.Page", null)
+                        .WithMany("Photos")
+                        .HasForeignKey("PageId");
+                });
+
+            modelBuilder.Entity("API.Model.StockManagemnt", b =>
+                {
+                    b.HasOne("API.Model.StockCat", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -5,6 +5,7 @@ using Application.Pages;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using API.Model;
 
 namespace API.Controllers
 {

@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using API.Model;
 
-namespace API.Features._PagePhotos
+namespace API.Features._StockCat
 {
-    public class PagePhotosDto
+    public class StockCatDto
     {
 		public Guid Id { get; set; }
-		public string Url { get; set; }
+		public string Title { get; set; }
     }
 }

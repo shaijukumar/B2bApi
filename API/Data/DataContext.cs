@@ -20,7 +20,7 @@ namespace API.Data
         //Page Publishing
         public DbSet<PageItemCategory> PageItemCategorys { get; set; }
         public DbSet<Page> Pages { get; set; }
-        public DbSet<PagePhotos> PagePhotoss { get; set; }
+        public DbSet<PagePhoto> PagePhotos { get; set; }
 
         public DbSet<Catalog> Catalogs { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -30,11 +30,13 @@ namespace API.Data
 
         public DbSet<TestApp> TestApps { get; set; }
         public DbSet<OrderAttachments> OrderAttachmentss { get; set; }
-		public DbSet<OrderTransactions> OrderTransactionss { get; set; }
-		public DbSet<OrderMaster> OrderMasters { get; set; }
-		
+        public DbSet<OrderTransactions> OrderTransactionss { get; set; }
+        public DbSet<OrderMaster> OrderMasters { get; set; }
+
+        public DbSet<StockCat> StockCats { get; set; }
+		public DbSet<StockManagemnt> StockManagemnts { get; set; }
 		//##ModelDbSet##
-        
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -45,6 +47,7 @@ namespace API.Data
             .WithMany(x => x.Children)
             .HasForeignKey(x => x.ParentId)
             .OnDelete(DeleteBehavior.Restrict);
+
 
             builder.Entity<Page>()
                 .HasIndex(u => u.URLTitle).IsUnique();
@@ -63,6 +66,8 @@ namespace API.Data
         }
     }
 }
+
+
 
 
 

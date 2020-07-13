@@ -2,17 +2,20 @@
 ===============================
 > dotnet tool install --global dotnet-ef 
 > dotnet ef 
-> dotnet ef migrations add PagesUpdate -p API/ -s API/ 
+> dotnet ef migrations add Update2 -p API/ -s API/ 
 > dotnet ef migrations add PageIsUniqueKeyAdded -p Persistence/ -s API/ 
 > drop database 
-> dotnet ef  database drop -p Persistence/ -s API/ 
+> dotnet ef  database drop -p API/ -s API/ 
+
+dotnet ef migrations add remove -p API/ -s API/ 
+\bu
 
 ===============================
 Git
 
 echo "# B2B" >> README.md
 git init
-git add README.md
+git add README.md\b
 git commit -m "first commit"
 git remote add origin https://github.com/shaijukumar/B2B.git
 git push -u origin master

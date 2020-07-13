@@ -12,26 +12,26 @@ using System.Collections;
 using System.Collections.Generic;
 using AutoMapper;
 
-namespace API.Features._PagePhotos
+namespace API.Features._StockCat
 {
     public class Create
     {
-        public class Command : IRequest<PagePhotosDto>
+        public class Command : IRequest<StockCatDto>
         {
 
-		public string Url { get; set; }
+		public string Title { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
             {
-RuleFor(x => x.Url).NotEmpty();
+RuleFor(x => x.Title).NotEmpty();
 				
             }
         }
 
-        public class Handler : IRequestHandler<Command, PagePhotosDto>
+        public class Handler : IRequestHandler<Command, StockCatDto>
         {
             private readonly DataContext _context;
             private readonly IUserAccessor _userAccessor;
@@ -44,19 +44,19 @@ RuleFor(x => x.Url).NotEmpty();
 
             }
 
-            public async Task<PagePhotosDto> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<StockCatDto> Handle(Command request, CancellationToken cancellationToken)
             {                                                   
-                var pagePhotos = new PagePhotos
+                var stockCat = new StockCat
                 {
-					Url  = request.Url                  
+					Title  = request.Title                  
                 };
 
-        _context.PagePhotoss.Add(pagePhotos);
+        _context.StockCats.Add(stockCat);
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success)
                 {
-                    var toReturn = _mapper.Map <PagePhotos, PagePhotosDto>(pagePhotos);
+                    var toReturn = _mapper.Map <StockCat, StockCatDto>(stockCat);
                     return toReturn;
                 }                
 

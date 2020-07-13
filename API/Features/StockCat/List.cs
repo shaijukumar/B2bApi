@@ -10,13 +10,13 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Features._PagePhotos
+namespace API.Features._StockCat
 {
     public class List
     {
-        public class Query : IRequest<List<PagePhotosDto>> { }
+        public class Query : IRequest<List<StockCatDto>> { }
 
-        public class Handler : IRequestHandler<Query, List<PagePhotosDto>>
+        public class Handler : IRequestHandler<Query, List<StockCatDto>>
         {
             private readonly IMapper _mapper;
 
@@ -33,12 +33,12 @@ namespace API.Features._PagePhotos
                 _userManager = userManager;
             }
 
-            public async Task<List<PagePhotosDto>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<StockCatDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var pagePhotos = await _context.PagePhotoss
+                var stockCat = await _context.StockCats
                     .ToListAsync();
 					
-                return _mapper.Map<List<PagePhotos>, List<PagePhotosDto>>(pagePhotos);
+                return _mapper.Map<List<StockCat>, List<StockCatDto>>(stockCat);
                 
             }
         }

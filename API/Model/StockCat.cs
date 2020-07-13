@@ -2,10 +2,10 @@ using System;
 
 namespace API.Model
 {
-    public class PagePhotos
+    public class StockCat
     {
 		public Guid Id { get; set; }
-		public string Url { get; set; }
+		public string Title { get; set; }
     }
 }
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200703041752_PageCategoryUpdate")]
-    partial class PageCategoryUpdate
+    [Migration("20200709152005_One")]
+    partial class One
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -253,9 +253,6 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AttachmentType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid?>("OrderTransactionsId")
                         .HasColumnType("uniqueidentifier");
 
@@ -338,6 +335,41 @@ namespace API.Migrations
                     b.ToTable("OrderTransactionss");
                 });
 
+            modelBuilder.Entity("API.Model.Page", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PageHtml")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PageStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("URLTitle")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("URLTitle")
+                        .IsUnique()
+                        .HasFilter("[URLTitle] IS NOT NULL");
+
+                    b.ToTable("Pages");
+                });
+
             modelBuilder.Entity("API.Model.PageItemCategory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -358,6 +390,24 @@ namespace API.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("PageItemCategorys");
+                });
+
+            modelBuilder.Entity("API.Model.PagePhotos", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid?>("PageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PageId");
+
+                    b.ToTable("PageImages");
                 });
 
             modelBuilder.Entity("API.Model.TestApp", b =>
@@ -604,6 +654,13 @@ namespace API.Migrations
                         .HasForeignKey("OrderMasterId");
                 });
 
+            modelBuilder.Entity("API.Model.Page", b =>
+                {
+                    b.HasOne("API.Model.PageItemCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+                });
+
             modelBuilder.Entity("API.Model.PageItemCategory", b =>
                 {
                     b.HasOne("API.Model.PageItemCategory", "Parent")
@@ -611,6 +668,13 @@ namespace API.Migrations
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Model.PagePhotos", b =>
+                {
+                    b.HasOne("API.Model.Page", null)
+                        .WithMany("PhotoList")
+                        .HasForeignKey("PageId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -7,7 +7,7 @@ using API.Errors;
 using API.Interfaces;
 using MediatR;
 
-namespace API.Features._PagePhotos
+namespace API.Features._StockManagemnt
 {
     public class Delete
     {
@@ -28,14 +28,14 @@ namespace API.Features._PagePhotos
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var pagePhotos = await _context.PagePhotoss
+                var stockManagemnt = await _context.StockManagemnts
                     .FindAsync(request.Id);
-                if (pagePhotos == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { PagePhotos = "Not found" });
+                if (stockManagemnt == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { StockManagemnt = "Not found" });
 
                 var CurrentUsername = _userAccessor.GetCurrentUsername();
 
-                _context.Remove(pagePhotos);
+                _context.Remove(stockManagemnt);
 				var success = await _context.SaveChangesAsync() > 0;
 				if (success) return Unit.Value;
 

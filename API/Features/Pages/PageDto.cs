@@ -1,4 +1,6 @@
+using API.Model;
 using System;
+using System.Collections.Generic;
 
 namespace Application.Pages
 {
@@ -11,6 +13,8 @@ namespace Application.Pages
         public string PageHtml { get; set; }   
         public string CategoryId { get; set; }  
         public string Category { get; set; }
-        public string CategoryPath { get; set; }        
+        public string CategoryPath { get; set; }
+        public ICollection<PagePhoto> Photos { get; set; }
+
     }
 }
